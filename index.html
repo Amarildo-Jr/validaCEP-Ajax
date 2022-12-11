@@ -1,0 +1,42 @@
+<html>
+    <head>
+      <title>ViaCEP Webservice</title>
+
+      <!-- Adicionando Javascript -->
+      <script src="script.js"></script>
+      <script>
+        function mascara(t, mask){
+          var i = t.value.length;
+          var saida = mask.substring(1,0);
+          var texto = mask.substring(i)
+          if (texto.substring(0,1) != saida){
+            t.value += texto.substring(0,1);
+          }
+        }
+      </script>
+    </head>
+
+    <body>
+    <!-- Inicio do formulario -->
+      <form method="get" action=".">
+        <label>Cep:
+        <input type="text" name="cep" id="cep" onkeypress="mascara(this, '#####-###')" maxlength="9">
+        <!-- <input name="cep" type="te" id="cep" value="" size="10" maxlength="9"> -->
+        </label><br/>
+        <label>Rua:
+        <input name="rua" type="text" id="rua" size="60"></label><br />
+        <label>Bairro:
+        <input name="bairro" type="text" id="bairro" size="40"></label><br />
+        <label>Cidade:
+        <input name="cidade" type="text" id="cidade" size="40"></label><br />
+        <label>Estado:
+        <input name="uf" type="text" id="uf" size="2"></label><br />
+        <label>IBGE:
+        <input name="ibge" type="text" id="ibge" size="8"></label><br />
+        <br>
+        <input value="Pesquisar CEP" type="button"
+        onClick="pesquisacep();" />
+      </form>
+    </body>
+
+    </html>
