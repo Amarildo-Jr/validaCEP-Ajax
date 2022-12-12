@@ -11,17 +11,9 @@ body, html {
 }
 
 body {
+    font-size: 16px;
     font-family: 'Roboto', sans-serif;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: #fff;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #344e41;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color: #597e54;
     color: #dad7cd;
     display: flex;
     flex-direction: column;
@@ -60,6 +52,7 @@ form input {
 }
 
 form #campo-cep {
+    margin: 1em;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -88,23 +81,4 @@ form .btn:hover {
     color: #1b2f31;
     transition: 0.4s;
     cursor: pointer;
-}
-
-.page {
-    margin-top: 10rem;
-}
-
-#success {
-    margin-top: 2rem;
-    display: none;
-}
-  
-#fail {
-    margin-top: 2rem;
-    display: none;
-}
-  
-#fail2 {
-    margin-top: 2rem;
-    display: none;
 }

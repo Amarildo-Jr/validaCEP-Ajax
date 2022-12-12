@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-      <title>Formulário de Endereço</title>
-
-      <script src="script.js"></script>
-      <script>
-        function mascara(t, mask){
-          var i = t.value.length;
-          var saida = mask.substring(1,0);
-          var texto = mask.substring(i)
-          if (texto.substring(0,1) != saida){
-            t.value += texto.substring(0,1);
-          }
+  <head>
+    <title>Formulário de Endereço</title>
+    <link rel="shortcut icon" href="icone.png">
+    <script src="script.js"></script>
+    <script>
+      function mascara(t, mask){
+        var i = t.value.length;
+        var saida = mask.substring(1,0);
+        var texto = mask.substring(i)
+        if (texto.substring(0,1) != saida){
+          t.value += texto.substring(0,1);
         }
-      </script>
-      <link rel="stylesheet" href="style.css">
-    </head>
+      }
+    </script>
+    <link rel="stylesheet" href="style.css">
+  </head>
 
-    <body>
+  <body>
+    <header></header>
+    <main>
       <div id="pagina">
         <h1>Endereço</h1>
 
         <form method="get" action="." autocomplete="off">
           <div id="campo-cep">
-            <label>Cep:
+            <label>CEP:
             <input type="text" name="cep" id="cep" onkeypress="mascara(this, '#####-###')" maxlength="9">
-            <!-- <input name="cep" type="te" id="cep" value="" size="10" maxlength="9"> -->
             </label><br>
 
             <input value="Validar CEP" type="button"
@@ -49,6 +50,6 @@
 
         </form>
       </div>
-    </body>
-
-    </html>
+    </main>
+  </body>
+</html>

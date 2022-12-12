@@ -1,14 +1,14 @@
 let ajax;
 
 function criarConexao() {
-    try {
-      ajax = new XMLHttpRequest();
+	try {
+		ajax = new XMLHttpRequest();
     } catch (failed) {
-          ajax = null;
+		ajax = null;
     }
 
     if (ajax == null)
-      alert("Erro ao criar uma conexão utilizando Ajax.");
+		alert("Erro ao criar uma conexão utilizando Ajax.");
 }
 
 function pesquisacep() {
@@ -21,38 +21,38 @@ function pesquisacep() {
     console.log(url)
     
     if (cep != "") {
-		  var validacep = /^[0-9]{8}$/;
-      if(validacep.test(cep)) {
-        document.getElementById('rua').value=("...");
-        document.getElementById('bairro').value=("...");
-        document.getElementById('cidade').value=("...");
-        document.getElementById('uf').value=("...");
-        document.getElementById('ibge').value=("...");
+		var validacep = /^[0-9]{8}$/;
+		if(validacep.test(cep)) {
+			document.getElementById('rua').value=("...");
+			document.getElementById('bairro').value=("...");
+			document.getElementById('cidade').value=("...");
+			document.getElementById('uf').value=("...");
+			document.getElementById('ibge').value=("...");
         
-        ajax.onreadystatechange = atualizaPagina;
-      } else {
-        limparFormulario();
-        alert("Formato de CEP inválido.");
-      }
+        	ajax.onreadystatechange = atualizaPagina;
+		} else {
+			limparFormulario();
+        	alert("Formato de CEP inválido.");
+		}		
     } else {
-      limparFormulario();
-      alert("Digite um CEP.");
+		limparFormulario();
+		alert("Digite um CEP.");
     }
     ajax.send();
 }
 
 function limparFormulario() {
-    //Limpa valores do formulário de cep.
-    document.getElementById('rua').value=("");
-    document.getElementById('bairro').value=("");
-    document.getElementById('cidade').value=("");
-    document.getElementById('uf').value=("");
-    document.getElementById('ibge').value=("");
+	//Limpa valores do formulário de cep.
+	document.getElementById('rua').value=("");
+	document.getElementById('bairro').value=("");
+	document.getElementById('cidade').value=("");
+	document.getElementById('uf').value=("");
+	document.getElementById('ibge').value=("");
 }
 
 function atualizaPagina() {
 	const resposta = ajax.response;
-  console.log(resposta)
+	console.log(resposta)
 	if (resposta == null) return;
 
 	if (!resposta.erro) {
