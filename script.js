@@ -3,41 +3,45 @@ let ajax;
 function criarConexao() {
     try {
       ajax = new XMLHttpRequest();
-    } catch (trymicrosoft) {
-      try {
-        ajax = new ActiveXObject("Msxml2.XMLHTTP");
-      } catch (othermicrosoft) {
-        try {
-          ajax = new ActiveXObject("Microsoft.XMLHTTP");
-        } catch (failed) {
+    } catch (failed) {
           ajax = null;
-        }
-      }
     }
 
     if (ajax == null)
-      alert("Error creating request object!");
+      alert("Erro ao criar uma conexão utilizando Ajax.");
 }
 
 function pesquisacep() {
     let cep = document.getElementById('cep').value.replace(/\D/g, '');
     criarConexao();
 
-    document.getElementById('rua').value=("...");
-    document.getElementById('bairro').value=("...");
-    document.getElementById('cidade').value=("...");
-    document.getElementById('uf').value=("...");
-    document.getElementById('ibge').value=("...");
-
     url=`https://viacep.com.br/ws/${cep}/json/`
     ajax.open("GET", url, true);
     ajax.responseType = "json";
     console.log(url)
-    ajax.onreadystatechange = atualizaPagina;
+    
+    if (cep != "") {
+		  var validacep = /^[0-9]{8}$/;
+      if(validacep.test(cep)) {
+        document.getElementById('rua').value=("...");
+        document.getElementById('bairro').value=("...");
+        document.getElementById('cidade').value=("...");
+        document.getElementById('uf').value=("...");
+        document.getElementById('ibge').value=("...");
+        
+        ajax.onreadystatechange = atualizaPagina;
+      } else {
+        limparFormulario();
+        alert("Formato de CEP inválido.");
+      }
+    } else {
+      limparFormulario();
+      alert("Digite um CEP.");
+    }
     ajax.send();
 }
 
-function limpa_formulário_cep() {
+function limparFormulario() {
     //Limpa valores do formulário de cep.
     document.getElementById('rua').value=("");
     document.getElementById('bairro').value=("");
@@ -47,12 +51,18 @@ function limpa_formulário_cep() {
 }
 
 function atualizaPagina() {
-    if (ajax.readyState == 4 && ajax.status == 200) {
-        const resposta = ajax.response;
-        document.getElementById('rua').value=(resposta.logradouro);
-        document.getElementById('bairro').value=(resposta.bairro);
-        document.getElementById('cidade').value=(resposta.localidade);
-        document.getElementById('uf').value=(resposta.uf);
-        document.getElementById('ibge').value=(resposta.ibge);
-    }
+	const resposta = ajax.response;
+  console.log(resposta)
+	if (resposta == null) return;
+
+	if (!resposta.erro) {
+		document.getElementById('rua').value=(resposta.logradouro);
+		document.getElementById('bairro').value=(resposta.bairro);
+		document.getElementById('cidade').value=(resposta.localidade);
+		document.getElementById('uf').value=(resposta.uf);
+		document.getElementById('ibge').value=(resposta.ibge);
+	} else {
+		limparFormulario();
+		alert("CEP não encontrado.");
+	}
 }
